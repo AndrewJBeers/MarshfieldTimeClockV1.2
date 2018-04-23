@@ -167,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Code\DBMaster.cs" />
+    <Content Include="App_Code\Employee.cs" />
     <Compile Include="HoursWorked.aspx.cs">
       <DependentUpon>HoursWorked.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

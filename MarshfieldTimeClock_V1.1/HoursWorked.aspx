@@ -6,105 +6,129 @@
         /*#btn-hours{
             background-color: #1f3576;
         }*/
+        .auto-style7 {
+            width: 42px;
+            border: thin solid #666666;
+            height: 27px;
+        }
+        .auto-style8 {
+            width: 65px;
+            border: thin solid #666666;
+            height: 27px;
+        }
+        .auto-style9 {
+            width: 69px;
+            border: thin solid #666666;
+            height: 27px;
+        }
     </style>
 </asp:Content>
 <%--Main--%>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form id="form1" runat="server">
-        
-
         <div id="InteractivePage">
-        
            <br />
            <h2 id="HoursWorkedHeader"> Hours Worked </h2>
            <br />
-       <div id="Worked">
-
-           <br />
-
-           <table id="HoursWorkedTable">
-               <tr id="HeaderRow">
-                   <td class="auto-style2">&nbsp;</td>
-                   <td class="auto-style4">Week Number</td>
-                   <td class="auto-style6">Week Number</td>
-                   <td class="auto-style6">Week Number</td>
-                   <td class="auto-style6">Week Number</td>
-               </tr>
-               <tr id="SundayRow">
-                   <td class="auto-style2">Sunday</td>
-                   <td class="auto-style4">&nbsp;</td>
-                   <td class="auto-style6">&nbsp;</td>
-                   <td class="auto-style6">&nbsp;</td>
-                   <td class="auto-style6">&nbsp;</td>
-               </tr>
-               <tr id="MondayRow">
-                   <td class="auto-style3">Monday</td>
-                   <td class="auto-style5"></td>
-                   <td class="auto-style1"></td>
-                   <td class="auto-style1">&nbsp;</td>
-                   <td class="auto-style1">&nbsp;</td>
-               </tr>
-               <tr id="TuesdayRow">
-                   <td class="auto-style2">Tuesday</td>
-                   <td class="auto-style4">&nbsp;</td>
-                   <td class="auto-style6">&nbsp;</td>
-                   <td class="auto-style6">&nbsp;</td>
-                   <td class="auto-style6">&nbsp;</td>
-               </tr>
-               <tr id="WednesdayRow">
-                   <td class="auto-style2">Wednesday</td>
-                   <td class="auto-style4">&nbsp;</td>
-                   <td class="auto-style6">&nbsp;</td>
-                   <td class="auto-style6">&nbsp;</td>
-                   <td class="auto-style6">&nbsp;</td>
-               </tr>
-               <tr id="ThursdayRow">
-                   <td class="auto-style2">Thursday</td>
-                   <td class="auto-style4">&nbsp;</td>
-                   <td class="auto-style6">&nbsp;</td>
-                   <td class="auto-style6">&nbsp;</td>
-                   <td class="auto-style6"">&nbsp;</td>
-               </tr>
-               <tr id="FridayRow">
-                   <td class="auto-style2">Friday</td>
-                   <td class="auto-style4">&nbsp;</td>
-                   <td class="auto-style6">&nbsp;</td>
-                   <td class="auto-style6">&nbsp;</td>
-                   <td class="auto-style6">&nbsp;</td>
-               </tr>
-               <tr id="SaturdayRow">
-                   <td class="auto-style2">Saturday</td>
-                   <td class="auto-style4">&nbsp;</td>
-                   <td class="auto-style6">&nbsp;</td>
-                   <td class="auto-style6">&nbsp;</td>
-                   <td class="auto-style6">&nbsp;</td>
-               </tr>
-               <tr id="TotalRow">
-                   <td class="TotalCol1">Total Hours</td>
-                   <td class="TotalCol2">&nbsp;</td>
-                   <td class="TotalCol3">&nbsp;</td>
-                   <td class="TotalCol4">&nbsp;</td>
-                   <td class="TotalCol5">&nbsp;</td>
-               </tr>
-           </table>
-
-           <br />
-
-       </div>
-        <div id="HoursWorkedButtons" style="text-align: center">
-
-            <br />
-
-            <br style="font-family: monospace" />
-            <asp:Button ID="btnBack" runat="server" Text="Back" />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:Button ID="btnPrevious" runat="server" Text="Previous Pay Period" />
-
-            <br />
-
+            <div id="Worked">
+               <br />
+                <asp:Table ID="HoursWorkedTable" runat="server" Height="96px" Width="218px" BorderWidth="2" CellPadding="5" CellSpacing="5" GridLines="Both" BorderStyle="Solid">
+                     <asp:TableHeaderRow runat="server">
+                        <asp:TableHeaderCell></asp:TableHeaderCell>
+                        <asp:TableHeaderCell ID ="wk1Header">Week 1</asp:TableHeaderCell>
+                        <asp:TableHeaderCell ID ="wk2Header">Week 2</asp:TableHeaderCell>
+                        <asp:TableHeaderCell ID ="wk3Header">Week 3</asp:TableHeaderCell>
+                        <asp:TableHeaderCell ID ="wk4Header">Week 4</asp:TableHeaderCell>
+                        <asp:TableHeaderCell ID ="wk5Header">Week 5</asp:TableHeaderCell>
+                        <asp:TableHeaderCell ID ="wk6Header">Week 6</asp:TableHeaderCell>
+                        <asp:TableHeaderCell ID ="TotalHeader">Total Hours</asp:TableHeaderCell>
+                    </asp:TableHeaderRow>
+                    <asp:TableRow ID ="RowSunday" runat="server">
+                        <asp:TableCell>Sunday</asp:TableCell>
+                        <asp:TableCell ID ="Wk1Sun">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk2Sun">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk3Sun">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk4Sun">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk5Sun">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk6Sun">0</asp:TableCell>
+                        <asp:TableCell></asp:TableCell>
+                    </asp:TableRow>
+                     <asp:TableRow ID ="RowMonday" runat="server">
+                        <asp:TableCell>Monday</asp:TableCell>
+                        <asp:TableCell ID ="Wk1Mon">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk2Mon">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk3Mon">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk4Mon">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk5Mon">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk6Mon">0</asp:TableCell>
+                         <asp:TableCell></asp:TableCell>
+                    </asp:TableRow>
+                     <asp:TableRow ID ="RowTuesday" runat="server">
+                        <asp:TableCell>Tuesday</asp:TableCell>
+                        <asp:TableCell ID ="Wk1Tues">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk2Tues">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk3Tues">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk4Tues">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk5Tues">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk6Tues">0</asp:TableCell>
+                         <asp:TableCell></asp:TableCell>
+                    </asp:TableRow>
+                     <asp:TableRow ID ="RowWednessday" runat="server">
+                        <asp:TableCell>Wednessday</asp:TableCell>
+                        <asp:TableCell ID ="Wk1Wed">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk2Wed">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk3Wed">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk4Wed">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk5Wed">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk6Wed">0</asp:TableCell>
+                         <asp:TableCell></asp:TableCell>
+                    </asp:TableRow>
+                     <asp:TableRow ID ="RowThursday" runat="server">
+                        <asp:TableCell>Thursday</asp:TableCell>
+                        <asp:TableCell ID ="Wk1Thur">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk2Thur">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk3Thur">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk4Thur">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk5Thur">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk6Thur">0</asp:TableCell>
+                         <asp:TableCell></asp:TableCell>
+                    </asp:TableRow>
+                     <asp:TableRow ID ="RowFriday" runat="server">
+                        <asp:TableCell>Friday</asp:TableCell>
+                        <asp:TableCell ID ="Wk1Fri">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk2Fri">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk3Fri">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk4Fri">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk5Fri">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk6Fri">0</asp:TableCell>
+                         <asp:TableCell></asp:TableCell>
+                    </asp:TableRow>
+                     <asp:TableRow ID ="RowSaturday" runat="server">
+                        <asp:TableCell>Saturday</asp:TableCell>
+                        <asp:TableCell ID ="Wk1Sat">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk2Sat">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk3Sat">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk4Sat">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk5Sat">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk6Sat">0</asp:TableCell>
+                         <asp:TableCell></asp:TableCell>
+                    </asp:TableRow>
+                     <asp:TableRow ID ="RowTotal" runat="server">
+                        <asp:TableCell>Total</asp:TableCell>
+                        <asp:TableCell ID ="Wk1Total">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk2Total">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk3Total">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk4Total">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk5Total">0</asp:TableCell>
+                        <asp:TableCell ID ="Wk6Total">0</asp:TableCell>
+                        <asp:TableCell ID ="FinalTotal">0</asp:TableCell>
+                    </asp:TableRow>
+               </asp:Table>
+               <br />
+               <br />
+           </div>
         </div>
-    </div>
-
-
     </form>
 </asp:Content>
+
