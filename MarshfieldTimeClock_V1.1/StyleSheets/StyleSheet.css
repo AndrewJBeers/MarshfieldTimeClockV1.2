@@ -65,6 +65,7 @@ li a {
     height: 30px; 
     text-align: center;  
     font-family: monospace; 
+    font-weight: bold;
     background-color: #3f69e2;
 }
 /*End of Every Page Styles*/
@@ -152,14 +153,28 @@ li a {
     text-align: center;
     padding-bottom: 50px;
 }
-#btnChangeRole{
-    background-color: #B9C8F4;
-    border: none;
+/*#drpDwnWorkId{
+    Font-family: monospace;
+    font-size: 15px;
+
+}*/
+#chkBxLunch{
+    font-weight: bold;
     font-family: monospace;
-    color: #50504E;
-    height: 23px;
-    width: 103px;
+    Font-Size: 15px; 
+    Color: #1F3576; 
 }
+#btnChangeRole{
+    border-style: none;
+    border-color: inherit;
+    border-width: medium;
+    background-color: #e6f3ff;
+    width: 150px;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 18px;
+    color: #50504E;
+    }
 #btnClockIn{
     background-color:#50504E; 
     font-weight: bold; 
@@ -188,57 +203,6 @@ li a {
 #HoursWorked{
     text-align: center; 
 }
-#HoursWorkedTable{
-    margin: auto;
-    width: 53%;
-}
-.auto-style1 {
-    height: 23px;
-    width: 69px;
-    border: thin solid #666666;
-}
-.auto-style2 {
-    width: 42px;
-    border: thin solid #666666;
-}
-.auto-style3 {
-    height: 23px;
-    width: 42px;
-    border: thin solid #666666;
-}
-.auto-style4 {
-    width: 65px;
-    border: thin solid #666666;
-}
-.auto-style5 {
-    height: 23px;
-    width: 65px;
-    border: thin solid #666666;
-}
-.auto-style6 {
-    width: 69px;
-    border: thin solid #666666;
-}
-.TotalCol1{
-    border: thin solid #666666; 
-    background-color: #D5DEF9; 
-}
-.TotalCol2{
-    border: thin solid #666666; 
-    background-color: #D5DEF9; 
-}
-.TotalCol3{
-    border: thin solid #666666; 
-    background-color: #D5DEF9; 
-}
-.TotalCol4{
-    border: thin solid #666666; 
-    background-color: #D5DEF9; 
-}
-.TotalCol5{
-    border: thin solid #666666; 
-    background-color: #D5DEF9; 
-}
 #HoursWorkedHeader{
     text-align: center;
     font-family: monospace; 
@@ -250,25 +214,195 @@ li a {
     text-decoration: none; 
     font-style: italic;
 }
-#HoursWorkedButtons{
+#HoursWorkedTable{
+    margin: auto;
+    width: 218px;
+    height: 96px;
+    Border-Width: 2px; 
+    Padding: 5px; 
+}
+/*Hours Worked table*/
+/*Hours Worked table Headers*/
+#wk1Header, #wk2Header, #wk3Header, #wk4Header, #wk5Header, #wk6Header{
     text-align: center;
-}
-#btnBack{
-    background-color: #1F3576;
-    font-weight: bold;
     font-family: monospace;
-    color: #E0E0E0;
-    height: 31px;
-    width: 170px;
+    font-size: 20px;
+    width: 100px;
+    color: #e6f3ff;
+    background-color: #50504E;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin: 0px;
+    border-bottom: 5px solid #e6f3ff;
 }
-#btnPrevious{
-    background-color: #1F3576;
-    font-weight: bold;
+#TotalHeader{
+    text-align: center;
     font-family: monospace;
-    color: #E0E0E0;
-    height: 31px;
-    width: 170px;
+    font-size: 20px;
+    color: #50504E;
+    background-color: #e6f3ff;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin: 0px;
+    border-bottom: 5px solid #50504E;
 }
+/*Hours Worked table - Sunday*/
+#Sunday{
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 20px;
+    color: #1f3576;
+    border-bottom: thin solid #666666;
+    Padding: 6px;
+    margin: 0px;
+}
+#Wk1Sun, #Wk2Sun, #Wk3Sun, #Wk4Sun, #Wk5Sun, #Wk6Sun{
+    text-align: center;
+    color: #1f3576;
+    font-size: 20px;
+    height: 23px;
+    width: 69px;
+    border-bottom: thin solid #666666;
+}
+/*Hours Worked table - Monday*/
+#Monday{
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 20px;
+    color: #1f3576;
+    border-bottom: thin solid #666666;
+    Padding: 6px;
+    margin: 0px;
+}
+#Wk1Mon, #Wk2Mon, #Wk3Mon, #Wk4Mon, #Wk5Mon, #Wk6Mon{
+    text-align: center;
+    font-size: 20px;
+    color: #1f3576;
+    height: 23px;
+    width: 69px;
+    border-bottom: thin solid #666666;
+}
+
+/*Hours Worked table - Tuesday*/
+#Tuesday{
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 20px;
+    color: #1f3576;
+    border-bottom: thin solid #666666;
+    Padding: 6px;
+    margin: 0px;
+}
+#Wk1Tues, #Wk2Tues, #Wk3Tues, #Wk4Tues, #Wk5Tues, #Wk6Tues{
+    text-align: center;
+    font-size: 20px;
+    color: #1f3576;
+    height: 23px;
+    width: 69px;
+    border-bottom: thin solid #666666;
+}
+/*Hours Worked table - Wednesday*/
+#Wednesday{
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 20px;
+    color: #1f3576;
+    border-bottom: thin solid #666666;
+    Padding: 6px;
+    margin: 0px;
+}
+#Wk1Wed, #Wk2Wed, #Wk3Wed, #Wk4Wed, #Wk5Wed, #Wk6Wed{
+    text-align: center;
+    font-size: 20px;
+    color: #1f3576;
+    height: 23px;
+    width: 69px;
+    border-bottom: thin solid #666666;
+}
+/*Hours Worked table - Thursday*/
+#Thursday{
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 20px;
+    color: #1f3576;
+    border-bottom: thin solid #666666;
+    Padding: 6px;
+    margin: 0px;
+}
+#Wk1Thur, #Wk2Thur, #Wk3Thur, #Wk4Thur, #Wk5Thur, #Wk6Thur{
+    text-align: center;
+    font-size: 20px;
+    color: #1f3576;
+    height: 23px;
+    width: 69px;
+    border-bottom: thin solid #666666;
+}
+/*Hours Worked table - Friday*/
+#Friday{
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 20px;
+    color: #1f3576;
+    border-bottom: thin solid #666666;
+    Padding: 6px;
+    margin: 0px;
+}
+#Wk1Fri, #Wk2Fri, #Wk3Fri, #Wk4Fri, #Wk5Fri, #Wk6Fri{
+    text-align: center;
+    font-size: 20px;
+    color: #1f3576;
+    height: 23px;
+    width: 69px;
+    border-bottom: thin solid #666666;
+}
+
+/*Hours Worked table - Saturday*/
+#Saturday{
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 20px;
+    color: #1f3576;
+    border-bottom: thin solid #666666;
+    Padding: 6px;
+    margin: 0px;
+}
+#Wk1Sat, #Wk2Sat, #Wk3Sat, #Wk4Sat, #Wk5Sat, #Wk6Sat{
+    text-align: center;
+    font-size: 20px;
+    color: #1f3576;
+    height: 23px;
+    width: 69px;
+    border-bottom: thin solid #666666;
+}
+/*Hours Worked table - Total*/
+#Total{
+    font-family: monospace;
+    background-color: #e6f3ff;
+    font-weight: bold;
+    font-size: 20px;
+    color: #1f3576;
+    Padding: 6px;
+    margin: 0px;
+}
+#Wk1Total, #Wk2Total, #Wk3Total, #Wk4Total, #Wk5Total, #Wk6Total{
+    text-align: center;
+    font-size: 20px;
+    color: #1f3576;
+    height: 23px;
+    width: 69px;
+    background-color: #e6f3ff;
+}
+ #FinalTotal{
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #50504E;
+    height: 23px;
+    width: 69px;
+    background-color: #e6f3ff;
+ }
+
+
 /*End of Hours Worked Page*/
 ul {
     list-style-type: none;

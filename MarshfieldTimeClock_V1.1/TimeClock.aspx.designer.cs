@@ -49,6 +49,15 @@ namespace MarshfieldTimeClock_V1._1 {
         protected global::System.Web.UI.WebControls.DropDownList drpDwnWorkId;
         
         /// <summary>
+        /// chkBxLunch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkBxLunch;
+        
+        /// <summary>
         /// btnChangeRole control.
         /// </summary>
         /// <remarks>

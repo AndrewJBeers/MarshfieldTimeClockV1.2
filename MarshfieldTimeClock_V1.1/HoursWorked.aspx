@@ -7,17 +7,17 @@
             background-color: #1f3576;
         }*/
         .auto-style7 {
-            width: 42px;
+            /*width: 42px;*/
             border: thin solid #666666;
             height: 27px;
         }
         .auto-style8 {
-            width: 65px;
+            /*width: 65px;*/
             border: thin solid #666666;
             height: 27px;
         }
         .auto-style9 {
-            width: 69px;
+            /*width: 69px;*/
             border: thin solid #666666;
             height: 27px;
         }
@@ -33,7 +33,7 @@
            <br />
             <div id="Worked">
                <br />
-                <asp:Table ID="HoursWorkedTable" runat="server" Height="96px" Width="218px" BorderWidth="2" CellPadding="5" CellSpacing="5" GridLines="Both" BorderStyle="Solid">
+                <asp:Table ID="HoursWorkedTable" runat="server" Height="96px" Width="218px" >
                      <asp:TableHeaderRow runat="server">
                         <asp:TableHeaderCell></asp:TableHeaderCell>
                         <asp:TableHeaderCell ID ="wk1Header">Week 1</asp:TableHeaderCell>
@@ -45,7 +45,7 @@
                         <asp:TableHeaderCell ID ="TotalHeader">Total Hours</asp:TableHeaderCell>
                     </asp:TableHeaderRow>
                     <asp:TableRow ID ="RowSunday" runat="server">
-                        <asp:TableCell>Sunday</asp:TableCell>
+                        <asp:TableCell ID="Sunday">Sunday</asp:TableCell>
                         <asp:TableCell ID ="Wk1Sun">0</asp:TableCell>
                         <asp:TableCell ID ="Wk2Sun">0</asp:TableCell>
                         <asp:TableCell ID ="Wk3Sun">0</asp:TableCell>
@@ -55,7 +55,7 @@
                         <asp:TableCell></asp:TableCell>
                     </asp:TableRow>
                      <asp:TableRow ID ="RowMonday" runat="server">
-                        <asp:TableCell>Monday</asp:TableCell>
+                        <asp:TableCell ID="Monday">Monday</asp:TableCell>
                         <asp:TableCell ID ="Wk1Mon">0</asp:TableCell>
                         <asp:TableCell ID ="Wk2Mon">0</asp:TableCell>
                         <asp:TableCell ID ="Wk3Mon">0</asp:TableCell>
@@ -65,7 +65,7 @@
                          <asp:TableCell></asp:TableCell>
                     </asp:TableRow>
                      <asp:TableRow ID ="RowTuesday" runat="server">
-                        <asp:TableCell>Tuesday</asp:TableCell>
+                        <asp:TableCell ID="Tuesday">Tuesday</asp:TableCell>
                         <asp:TableCell ID ="Wk1Tues">0</asp:TableCell>
                         <asp:TableCell ID ="Wk2Tues">0</asp:TableCell>
                         <asp:TableCell ID ="Wk3Tues">0</asp:TableCell>
@@ -75,7 +75,7 @@
                          <asp:TableCell></asp:TableCell>
                     </asp:TableRow>
                      <asp:TableRow ID ="RowWednessday" runat="server">
-                        <asp:TableCell>Wednessday</asp:TableCell>
+                        <asp:TableCell ID="Wednesday">Wednesday</asp:TableCell>
                         <asp:TableCell ID ="Wk1Wed">0</asp:TableCell>
                         <asp:TableCell ID ="Wk2Wed">0</asp:TableCell>
                         <asp:TableCell ID ="Wk3Wed">0</asp:TableCell>
@@ -85,7 +85,7 @@
                          <asp:TableCell></asp:TableCell>
                     </asp:TableRow>
                      <asp:TableRow ID ="RowThursday" runat="server">
-                        <asp:TableCell>Thursday</asp:TableCell>
+                        <asp:TableCell ID="Thursday">Thursday</asp:TableCell>
                         <asp:TableCell ID ="Wk1Thur">0</asp:TableCell>
                         <asp:TableCell ID ="Wk2Thur">0</asp:TableCell>
                         <asp:TableCell ID ="Wk3Thur">0</asp:TableCell>
@@ -95,7 +95,7 @@
                          <asp:TableCell></asp:TableCell>
                     </asp:TableRow>
                      <asp:TableRow ID ="RowFriday" runat="server">
-                        <asp:TableCell>Friday</asp:TableCell>
+                        <asp:TableCell ID="Friday">Friday</asp:TableCell>
                         <asp:TableCell ID ="Wk1Fri">0</asp:TableCell>
                         <asp:TableCell ID ="Wk2Fri">0</asp:TableCell>
                         <asp:TableCell ID ="Wk3Fri">0</asp:TableCell>
@@ -105,7 +105,7 @@
                          <asp:TableCell></asp:TableCell>
                     </asp:TableRow>
                      <asp:TableRow ID ="RowSaturday" runat="server">
-                        <asp:TableCell>Saturday</asp:TableCell>
+                        <asp:TableCell ID="Saturday">Saturday</asp:TableCell>
                         <asp:TableCell ID ="Wk1Sat">0</asp:TableCell>
                         <asp:TableCell ID ="Wk2Sat">0</asp:TableCell>
                         <asp:TableCell ID ="Wk3Sat">0</asp:TableCell>
@@ -115,7 +115,7 @@
                          <asp:TableCell></asp:TableCell>
                     </asp:TableRow>
                      <asp:TableRow ID ="RowTotal" runat="server">
-                        <asp:TableCell>Total</asp:TableCell>
+                        <asp:TableCell ID="Total">Total</asp:TableCell>
                         <asp:TableCell ID ="Wk1Total">0</asp:TableCell>
                         <asp:TableCell ID ="Wk2Total">0</asp:TableCell>
                         <asp:TableCell ID ="Wk3Total">0</asp:TableCell>

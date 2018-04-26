@@ -103,6 +103,15 @@ namespace MarshfieldTimeClock_V1._1 {
         protected global::System.Web.UI.WebControls.TableRow RowSunday;
         
         /// <summary>
+        /// Sunday control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell Sunday;
+        
+        /// <summary>
         /// Wk1Sun control.
         /// </summary>
         /// <remarks>
@@ -164,6 +173,15 @@ namespace MarshfieldTimeClock_V1._1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableRow RowMonday;
+        
+        /// <summary>
+        /// Monday control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell Monday;
         
         /// <summary>
         /// Wk1Mon control.
@@ -229,6 +247,15 @@ namespace MarshfieldTimeClock_V1._1 {
         protected global::System.Web.UI.WebControls.TableRow RowTuesday;
         
         /// <summary>
+        /// Tuesday control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell Tuesday;
+        
+        /// <summary>
         /// Wk1Tues control.
         /// </summary>
         /// <remarks>
@@ -290,6 +317,15 @@ namespace MarshfieldTimeClock_V1._1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableRow RowWednessday;
+        
+        /// <summary>
+        /// Wednesday control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell Wednesday;
         
         /// <summary>
         /// Wk1Wed control.
@@ -355,6 +391,15 @@ namespace MarshfieldTimeClock_V1._1 {
         protected global::System.Web.UI.WebControls.TableRow RowThursday;
         
         /// <summary>
+        /// Thursday control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell Thursday;
+        
+        /// <summary>
         /// Wk1Thur control.
         /// </summary>
         /// <remarks>
@@ -416,6 +461,15 @@ namespace MarshfieldTimeClock_V1._1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableRow RowFriday;
+        
+        /// <summary>
+        /// Friday control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell Friday;
         
         /// <summary>
         /// Wk1Fri control.
@@ -481,6 +535,15 @@ namespace MarshfieldTimeClock_V1._1 {
         protected global::System.Web.UI.WebControls.TableRow RowSaturday;
         
         /// <summary>
+        /// Saturday control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell Saturday;
+        
+        /// <summary>
         /// Wk1Sat control.
         /// </summary>
         /// <remarks>
@@ -542,6 +605,15 @@ namespace MarshfieldTimeClock_V1._1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableRow RowTotal;
+        
+        /// <summary>
+        /// Total control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableCell Total;
         
         /// <summary>
         /// Wk1Total control.

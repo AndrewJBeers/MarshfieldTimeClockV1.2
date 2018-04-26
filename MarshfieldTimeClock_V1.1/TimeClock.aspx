@@ -40,8 +40,10 @@
                 <asp:ListItem>Cook</asp:ListItem>
             </asp:DropDownList>
             <br />
+            <asp:CheckBox ID="chkBxLunch" runat="server" Font-Bold="True" Font-Names="monospace" Font-Size="15px" ForeColor="#1F3576" Text=" Worked Through Lunch" />
             <br />
-            <asp:Button ID="btnChangeRole" runat="server" Text="Change Role" OnClick="btnChangeRole_Click" />
+            <br />
+            <asp:Button ID="btnChangeRole" runat="server" Text="Change Role" OnClick="btnChangeRole_Click"/>
             <br />
             <br />
         </div>
