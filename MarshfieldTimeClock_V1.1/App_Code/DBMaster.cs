@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Configuration;
 
-namespace MarshfieldTimeClock_V1._1.App_Code
+namespace MarshfieldTimeClock_V1._1
 {
     public class DBMaster
     {
@@ -64,6 +64,7 @@ namespace MarshfieldTimeClock_V1._1.App_Code
                 this.conn.Close();
             }
         }
+
 
 
     }

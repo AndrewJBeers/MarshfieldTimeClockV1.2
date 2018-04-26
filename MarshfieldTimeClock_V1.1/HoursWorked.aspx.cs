@@ -4,6 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+
+
+
 
 namespace MarshfieldTimeClock_V1._1
 {
@@ -24,7 +28,21 @@ namespace MarshfieldTimeClock_V1._1
                 set5WeekMonth(sender, e);
             }
 
-           
+            Employee employee = new Employee();
+            DBMaster dbMaster = new DBMaster();
+            SqlDataReader reader = dbMaster.getReader("Select * From Log_Table");
+            int i = 0;
+            while (reader.Read())
+            {
+                employee.RolesDescription.Add(reader.ToString());
+            }
+            dbMaster.closeConnection();
+            foreach (string stuff in employee.RolesDescription)
+            {
+                Console.WriteLine(stuff);
+            }
+
+
         }
 
         protected void btnBack_Click(object sender, EventArgs e)
@@ -132,10 +150,12 @@ namespace MarshfieldTimeClock_V1._1
         }
 
         /// <summary>
-        /// returns if current month has 4 weeks
+        /// Sets Visual table to show 4 week month
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        ///
+        /// 
         protected void set4WeekMonth(object sender, EventArgs e)
         {
             wk5Header.Visible = false;
@@ -159,6 +179,11 @@ namespace MarshfieldTimeClock_V1._1
             Wk6Total.Visible = false;
 
         }
+        /// <summary>
+        /// Sets visual table to show 5 week month
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void set5WeekMonth(object sender, EventArgs e)
         {
             wk6Header.Visible = false;
@@ -172,6 +197,11 @@ namespace MarshfieldTimeClock_V1._1
             Wk6Total.Visible = false;
 
         }
+        /// <summary>
+        /// Calculates totals for table
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void calculateTotals(object sender, EventArgs e)
         {
             double wk1Hours = 0;
@@ -235,11 +265,6 @@ namespace MarshfieldTimeClock_V1._1
             Wk6Total.Text = wk6Hours.ToString();
 
             FinalTotal.Text = Convert.ToString(wk1Hours + wk2Hours + wk3Hours + wk4Hours + wk5Hours + wk6Hours);
-
-
-
-
-
 
 
         }
