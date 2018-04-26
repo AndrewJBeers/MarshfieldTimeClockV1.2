@@ -7,73 +7,51 @@ namespace MarshfieldTimeClock_V1._1
 {
     public class Employee
     {
-        private int employeeNumber;
+        private string employeeID;
+
         private List<string> rolesDescription = new List<string>();
+        private List<string> WorkID = new List<string>();
+
         private List<DateTime> daysWorked = new List<DateTime>();
         private List<double> hoursWorked = new List<double>();
 
-        public int EmployeeNumber
-        {
-            get
-            {
-                return employeeNumber;
-            }
 
-            set
-            {
-                employeeNumber = value;
-            }
+        public Employee(string employeeId)
+        {
+            employeeID = employeeId;
         }
 
+
+        public string EmployeeID
+        {
+            get { return employeeID;}
+        }
         public List<string> RolesDescription
         {
-            get
-            {
-                return rolesDescription;
-            }
+            get{ return rolesDescription; }
+            set { rolesDescription = value;}
+        }
 
-            set
-            {
-                rolesDescription = value;
-            }
+        public List<string> WorkID1
+        {
+            get { return WorkID;}
+            set { WorkID = value;}
         }
 
         public List<DateTime> DaysWorked
         {
-            get
-            {
-                return daysWorked;
-            }
-
-            set
-            {
-                daysWorked = value;
-            }
+            get{return daysWorked; }
+            set { daysWorked = value;}
         }
 
         public List<double> HoursWorked
         {
-            get
-            {
-                return hoursWorked;
-            }
-
-            set
-            {
-                hoursWorked = value;
-            }
+            get {return hoursWorked; }
+            set { hoursWorked = value; }
         }
 
-        public Employee(int employeeNumber, List<string> rolesDescription, List<DateTime> daysWorked, List<double> hoursWorked)
-        {
-            this.EmployeeNumber = employeeNumber;
-            this.RolesDescription = rolesDescription;
-            this.DaysWorked = daysWorked;
-            this.HoursWorked = hoursWorked;
-        }
 
-        public Employee()
-        {
-        }
+
+       
     }
 }

@@ -28,19 +28,19 @@ namespace MarshfieldTimeClock_V1._1
                 set5WeekMonth(sender, e);
             }
 
-            Employee employee = new Employee();
-            DBMaster dbMaster = new DBMaster();
-            SqlDataReader reader = dbMaster.getReader("Select * From Log_Table");
-            int i = 0;
-            while (reader.Read())
-            {
-                employee.RolesDescription.Add(reader.ToString());
-            }
-            dbMaster.closeConnection();
-            foreach (string stuff in employee.RolesDescription)
-            {
-                Console.WriteLine(stuff);
-            }
+            //Employee employee = new Employee();
+            //DBMaster dbMaster = new DBMaster();
+            //SqlDataReader reader = dbMaster.getReader("Select * From Log_Table");
+            //int i = 0;
+            //while (reader.Read())
+            //{
+            //    employee.RolesDescription.Add(reader.ToString());
+            //}
+            //dbMaster.closeConnection();
+            //foreach (string stuff in employee.RolesDescription)
+            //{
+            //    Console.WriteLine(stuff);
+            //}
 
 
         }
