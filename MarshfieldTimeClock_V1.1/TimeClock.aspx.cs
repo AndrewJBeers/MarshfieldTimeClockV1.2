@@ -83,26 +83,34 @@ namespace MarshfieldTimeClock_V1._1
         /// <param name="e"></param>
         protected void btnClockIn_Click(object sender, EventArgs e)
         {
-            myEmployee = (Employee)Session["Employee"];
-            lblAlert.Text = "";
-            lblTimeClockStatus.Text = "";
-            if (isClockedIn(sender, e) == false) // not currently clocked in, or missing punch from past day~~ allow clock in
+            try
             {
-                string time = DateTime.Now.ToString("t");
-                string date = DateTime.Now.ToString("D");
-                if(myEmployee.FogottenClockout != DateTime.MinValue)
+                myEmployee = (Employee)Session["Employee"];
+                lblAlert.Text = "";
+                lblTimeClockStatus.Text = "";
+                if (isClockedIn(sender, e) == false) // not currently clocked in, or missing punch from past day~~ allow clock in
                 {
-                    lblAlert.Text = ("You are missing your clock out from " + myEmployee.FogottenClockout.Date.ToShortDateString() + ". Please see managment.");
-                }
-                NewRecordInsert(sender, e);
-                lblTimeClockStatus.Text = ("you have clocked in at " + time + " " + date);
+                    string time = DateTime.Now.ToString("t");
+                    string date = DateTime.Now.ToString("D");
+                    if(myEmployee.FogottenClockout != DateTime.MinValue)
+                    {
+                        lblAlert.Text = ("You are missing your clock out from " + myEmployee.FogottenClockout.Date.ToShortDateString() + ". Please see managment.");
+                    }
+                    NewRecordInsert(sender, e);
+                    lblTimeClockStatus.Text = ("You have clocked in at " + time + " " + date);
                 
+                }
+                else  // clocked in from today ~~ alert and do nothing
+                {
+                    lblAlert.Text = ("You have already clocked in today");
+                   //do nothing
+                }
             }
-            else  // clocked in from today ~~ alert and do nothing
+            catch (Exception exc)
             {
-                lblAlert.Text = ("you have already clocked in today");
-               //do nothing
+                System.Diagnostics.Debug.WriteLine("######### TIMECLOCK btnClockIn_Click():  " + exc);
             }
+
         }
 
         /// <summary>
@@ -112,47 +120,63 @@ namespace MarshfieldTimeClock_V1._1
         /// <param name="e"></param>
         protected void btnClockOut_Click(object sender, EventArgs e)
         {
-            myEmployee = (Employee)Session["Employee"];
-            lblAlert.Text = "";
-            lblTimeClockStatus.Text = "";
-            if (isClockedIn(sender, e) == true)    // clocked in from today
+            try
             {
-                string time = DateTime.Now.ToString("t");
-                string date = DateTime.Now.ToString("D");
-                lblTimeClockStatus.Text = ("you have clocked out at " + time + " " + date);
-                RecordClockoutUpdate(sender, e);
+                myEmployee = (Employee)Session["Employee"];
+                lblAlert.Text = "";
+                lblTimeClockStatus.Text = "";
+                if (isClockedIn(sender, e) == true)    // clocked in from today
+                {
+                    string time = DateTime.Now.ToString("t");
+                    string date = DateTime.Now.ToString("D");
+                    lblTimeClockStatus.Text = ("You have clocked out at " + time + " " + date);
+                    RecordClockoutUpdate(sender, e);
+                }
+                else
+                {
+                    lblAlert.Text = ("You are not clocked in Today");
+                    // do nothing
+                }
             }
-            else
+            catch (Exception exc)
             {
-                lblAlert.Text = ("You are not clocked in Today");
-                // do nothing
+                System.Diagnostics.Debug.WriteLine("######### TIMECLOCK btnClockOut_Click():  " + exc);
             }
+
         }
 
         protected void btnChangeRole_Click(object sender, EventArgs e) /// ############# could cause problem if someone checks meal punch and then changes rolls!!! need to fix!!!
         {
-            myEmployee = (Employee)Session["Employee"];
-            lblAlert.Text = "";
-            lblTimeClockStatus.Text = "";
-            if (isClockedIn(sender, e) == true)    // clocked in from today
+            try
             {
-                if(isNewRole(sender,e) == true)    // new role can change roles
+                myEmployee = (Employee)Session["Employee"];
+                lblAlert.Text = "";
+                lblTimeClockStatus.Text = "";
+                if (isClockedIn(sender, e) == true)    // clocked in from today
                 {
-                    RecordClockoutUpdate(sender, e);
-                    NewRecordInsert(sender, e);
-                    lblTimeClockStatus.Text = ("Roll changed to " + drpDwnWorkId.SelectedItem+".");
+                    if(isNewRole(sender,e) == true)    // new role can change roles
+                    {
+                        RecordClockoutUpdate(sender, e);
+                        NewRecordInsert(sender, e);
+                        lblTimeClockStatus.Text = ("Role changed to " + drpDwnWorkId.SelectedItem+".");
+
+                    }
+                    else                                // same role as before, do not change rolls
+                    {
+                        lblAlert.Text = ("You are already clocked in as a " + drpDwnWorkId.SelectedItem.Text + ". Please select a different role.");
+                    }
 
                 }
-                else                                // same role as before, do not change rolls
+                else                                    // not clocked in
                 {
-                    lblAlert.Text = ("You are already clocked in as a " + drpDwnWorkId.SelectedItem.Text + ". Please select a different role.");
+                    lblAlert.Text = ("You are not clocked in Today");
                 }
-
             }
-            else                                    // not clocked in
+            catch (Exception exc)
             {
-                lblAlert.Text = ("You are not clocked in Today");
+                System.Diagnostics.Debug.WriteLine("######### TIMECLOCK btnChangeRole_Click():  " + exc);
             }
+
         }
         /// <summary>
         /// runs sql clockout db update 
@@ -161,13 +185,21 @@ namespace MarshfieldTimeClock_V1._1
         /// <param name="e"></param>
         protected void RecordClockoutUpdate(object sender, EventArgs e)
         {
-            string checkedBox = "0";
-            if(chkBxLunch.Checked == true)
+            try
             {
-                checkedBox = "1";
+                string checkedBox = "0";
+                if(chkBxLunch.Checked == true)
+                {
+                    checkedBox = "1";
+                }
+                myEmployee = (Employee)Session["Employee"];
+                db.updateRecord(DateTime.Now.ToString("HH:mm:ss"), DateTime.Now.ToString("MM/dd/yyyy"),checkedBox, myEmployee.EmployeeID);
             }
-            myEmployee = (Employee)Session["Employee"];
-            db.updateRecord(DateTime.Now.ToString("HH:mm:ss"), DateTime.Now.ToString("MM/dd/yyyy"),checkedBox, myEmployee.EmployeeID);
+            catch(Exception exc)
+            {
+                System.Diagnostics.Debug.WriteLine("######### TIMECLOCK RecordClockoutUpdate():  " + exc);
+            }
+
         }
        /// <summary>
        /// runs sql clock in insert
@@ -176,10 +208,17 @@ namespace MarshfieldTimeClock_V1._1
        /// <param name="e"></param>
        protected void NewRecordInsert(object sender, EventArgs e)
         {
-            myEmployee = (Employee)Session["Employee"];
-            //System.Diagnostics.Debug.WriteLine("######### TimeClock NewRecordInsert drpdown index: " + drpDwnWorkId.SelectedIndex);
+            try
+            {
+                myEmployee = (Employee)Session["Employee"];
+                db.insertNewRecord(myEmployee.WorkID[drpDwnWorkId.SelectedIndex], myEmployee.EmployeeID,myEmployee.Roles[drpDwnWorkId.SelectedIndex], DateTime.Now.ToString("HH:mm:ss"), DateTime.Now.ToString("MM/dd/yyyy"));
+            }
+            catch (Exception exc)
+            {
+                System.Diagnostics.Debug.WriteLine("######### TIMECLOCK NewRecordInsert():  " + exc);
 
-            db.insertNewRecord(myEmployee.WorkID[drpDwnWorkId.SelectedIndex], myEmployee.EmployeeID, DateTime.Now.ToString("HH:mm:ss"), DateTime.Now.ToString("MM/dd/yyyy"));
+            }
+
         }
         /// <summary>
         /// checks if selected roll is different from current role
@@ -189,20 +228,28 @@ namespace MarshfieldTimeClock_V1._1
         /// <returns></returns>
         protected bool isNewRole(object sender, EventArgs e)
         {
-            myEmployee = (Employee)Session["Employee"];
-            string workId="";
-            SqlDataReader reader = db.getSpReader("spCheckCurrentRole", "@EmployeeID", myEmployee.EmployeeID);
-            while (reader.Read())
+            try
             {
-                workId = reader[0].ToString();
+                myEmployee = (Employee)Session["Employee"];
+                string workId = "";
+                SqlDataReader reader = db.getSpReader("spCheckCurrentRole", "@EmployeeID", myEmployee.EmployeeID);
+                while (reader.Read())
+                {
+                    workId = reader[0].ToString();
+                }
+                if (myEmployee.WorkID[drpDwnWorkId.SelectedIndex] != workId) // if workid with index same as dropdown != workid
+                {
+                    return true;
+                }
+                else                                                        // same work id as current 
+                {
+                    return false;
+                }
+
             }
-            if(myEmployee.WorkID[drpDwnWorkId.SelectedIndex] != workId) // if workid with index same as dropdown != workid
+            catch(Exception exc)
             {
-                return true;
-            }
-            else                                                        // same work id as current 
-            {
-                return false;
+                System.Diagnostics.Debug.WriteLine("######### TIMECLOCK isNewRole():  " + exc);
             }
 
         }
@@ -214,38 +261,45 @@ namespace MarshfieldTimeClock_V1._1
         /// <returns></returns>
         protected bool isClockedIn(object sender, EventArgs e)
         {
-            myEmployee = (Employee)Session["Employee"];
-            myEmployee.FogottenClockout = DateTime.MinValue;
-            SqlDataReader reader = db.getSpReader("spCheckClockedIN", "@EmployeeID", myEmployee.EmployeeID);
-            while (reader.Read())
+            try
             {
+                myEmployee = (Employee)Session["Employee"];
+                myEmployee.FogottenClockout = DateTime.MinValue;
+                SqlDataReader reader = db.getSpReader("spCheckClockedIN", "@EmployeeID", myEmployee.EmployeeID);
+                while (reader.Read())
+                {
 
-                DateTime dateIn = Convert.ToDateTime(reader[0]);
-                if (reader[1] != DBNull.Value)
-                {
-                    //clocked out
-                    return false;
-                }
-                else
-                {
-                    // clocked in or missing clock out
-                    myEmployee.FogottenClockout = dateIn;
-                    if(dateIn.Date == DateTime.Now.Date)
+                    DateTime dateIn = Convert.ToDateTime(reader[0]);
+                    if (reader[1] != DBNull.Value)
                     {
-                        // considered clocked in 
-                        return true;
+                        //clocked out
+                        return false;
                     }
                     else
                     {
-                       // missing clock out from previous day, show as clocked out so employee can clock in for today
-                        return false;
+                        // clocked in or missing clock out
+                        myEmployee.FogottenClockout = dateIn;
+                        if(dateIn.Date == DateTime.Now.Date)
+                        {
+                            // considered clocked in 
+                            return true;
+                        }
+                        else
+                        {
+                           // missing clock out from previous day, show as clocked out so employee can clock in for today
+                            return false;
+                        }
                     }
                 }
             }
-            return false;
+            catch (Exception exc)
+            {
+                System.Diagnostics.Debug.WriteLine("######### TIMECLOCK isClockedIn():  " + exc);
+            }
+            //return false;
         }
 
 
 
-    }
+    }// end class
 }

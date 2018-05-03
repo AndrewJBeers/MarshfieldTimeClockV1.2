@@ -20,10 +20,17 @@ namespace MarshfieldTimeClock_V1._1
         /// <returns></returns>
         public SqlConnection getConnection()
         {
-            string connStr = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-            conn = new SqlConnection(connStr);
-            conn.Open();
-            return conn;
+            try
+            {
+                string connStr = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+                conn = new SqlConnection(connStr);
+                conn.Open();
+                return conn;
+            }
+            catch(Exception exc)
+            {
+                System.Diagnostics.Debug.WriteLine("######### DBMASTER getConnection():  " + exc);
+            }
         }
 
 
@@ -47,9 +54,9 @@ namespace MarshfieldTimeClock_V1._1
                 SqlDataReader reader = cmd.ExecuteReader();
                 return reader;
             }
-            catch(Exception e)
+            catch(Exception exc)
             {
-                System.Diagnostics.Debug.WriteLine("######### DBMASTER CATCH GETSPREADER" + e);
+                System.Diagnostics.Debug.WriteLine("######### DBMASTER getSpReader():  " + exc);
 
             }
             return null;
@@ -71,14 +78,14 @@ namespace MarshfieldTimeClock_V1._1
                 rowsAffected = cmd.ExecuteNonQuery();
                 closeConnection();
             }
-            catch (Exception e)
+            catch (Exception exc)
             {
-                System.Diagnostics.Debug.WriteLine("######### DBMASTER CATCH UpdateRecord" + e);
+                System.Diagnostics.Debug.WriteLine("######### DBMASTER updateRecord():  " + exc);
 
             }
             System.Diagnostics.Debug.WriteLine("######### DBMASTER SQL Update rowsAffected: " + rowsAffected);
         }
-        public void insertNewRecord(string workIdValue, string employeeIdValue, string clockInValue, string dateInValue)
+        public void insertNewRecord(string workIdValue, string employeeIdValue,string roleValue, string clockInValue, string dateInValue)
         {
             int rowsAffected=0;
             try
@@ -89,15 +96,16 @@ namespace MarshfieldTimeClock_V1._1
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@WorkID", workIdValue);
                 cmd.Parameters.AddWithValue("@EmployeeID", employeeIdValue);
+                cmd.Parameters.AddWithValue("@Role", roleValue);
                 cmd.Parameters.AddWithValue("@ClockIn", clockInValue);
                 cmd.Parameters.AddWithValue("@DateIn", dateInValue);
                 cmd.Connection = this.getConnection();
                 rowsAffected = cmd.ExecuteNonQuery();
                 closeConnection();
             }
-            catch (Exception e)
+            catch (Exception exc)
             {
-                System.Diagnostics.Debug.WriteLine("######### DBMASTER CATCH InsertNewREcord" + e);
+                System.Diagnostics.Debug.WriteLine("######### DBMASTER insertNewRecord():  " + exc);
 
             }
             System.Diagnostics.Debug.WriteLine("######### DBMASTER SQL INSERT rowsAffected: " + rowsAffected);
@@ -109,10 +117,18 @@ namespace MarshfieldTimeClock_V1._1
         /// </summary>
         public void closeConnection()
         {
-            if (conn != null && conn.State == System.Data.ConnectionState.Open)
+            try
             {
-                this.conn.Close();
+                if (conn != null && conn.State == System.Data.ConnectionState.Open)
+                {
+                    this.conn.Close();
+                }
             }
+            catch(Exception exc)
+            {
+                System.Diagnostics.Debug.WriteLine("######### DBMASTE closeConnection():  " + exc);
+            }
+
         }
         
 

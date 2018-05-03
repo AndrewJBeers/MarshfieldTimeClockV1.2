@@ -18,6 +18,7 @@ namespace MarshfieldTimeClock_V1._1
                 if (txtBxUserName.Text == "")
                 {
                     txtBxUserName.Text = "paul.rottmund";
+                    //rogina.totten
                 }
             }
         }

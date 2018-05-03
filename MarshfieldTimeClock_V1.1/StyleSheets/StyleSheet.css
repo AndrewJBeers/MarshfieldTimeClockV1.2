@@ -149,6 +149,7 @@ li a {
     Font-family: monospace; 
     Font-Size: X-Large;
 }
+
 #ClockInOut{
     text-align: center;
     padding-bottom: 50px;
@@ -175,6 +176,10 @@ li a {
     font-size: 18px;
     color: #50504E;
     }
+#lblAlert, #lblTimeClockStatus{
+    font-family: monospace;
+    color:  #1F3576;
+}
 #btnClockIn{
     background-color:#50504E; 
     font-weight: bold; 
