@@ -11,11 +11,31 @@ namespace MarshfieldTimeClock_V1._1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            System.Diagnostics.Debug.WriteLine("###############PageLoad");
+            if (!IsPostBack)
+            {
+                System.Diagnostics.Debug.WriteLine("###############!IPostBack");
+                if (txtBxUserName.Text == "")
+                {
+                    txtBxUserName.Text = "paul.rottmund";
+                }
+            }
         }
 
         protected void btnSignIn_Click(object sender, EventArgs e)
         {
+
+            if (txtBxUserName.Text != "")
+            {
+                System.Diagnostics.Debug.WriteLine("###############BtnSignIn");
+                Employee myEmployee = new Employee(txtBxUserName.Text);
+
+                Session["Employee"] = myEmployee;
+                System.Diagnostics.Debug.WriteLine("############SignIn" + Session["Employee"]);
+                Response.Redirect("TimeClock.aspx");
+            }
+
+
             /// if username and password are not empty
             try
             {
@@ -24,7 +44,6 @@ namespace MarshfieldTimeClock_V1._1
                 ///     log in and go to time clock page
                 /// ~~ else (not authorized)
                 ///     error msg wrong username or password
-
 
 
             }

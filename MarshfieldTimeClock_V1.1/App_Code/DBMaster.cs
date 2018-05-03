@@ -12,15 +12,6 @@ namespace MarshfieldTimeClock_V1._1
         
         private SqlConnection conn;
         
-        
-        /// check if clocked in * no clock out on last clock in older than today
-        /// post clock in
-        /// post clock out
-        /// post role change* combination of clock in clock out
-        /// check hours worked over current month payperiod
-        /// 
-
-
 
         /// <summary>
         /// Database connection
@@ -41,17 +32,76 @@ namespace MarshfieldTimeClock_V1._1
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        public SqlDataReader getReader(string query)
+        public SqlDataReader getSpReader(string spName, string spParameter, string value)
         {
-            // Create a command
-            //this connection string is not safe. Use a stored procedure
-            SqlCommand cmd = new SqlCommand(query);
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.Connection = this.getConnection();
+            try
+            {
+                // Create a command
+                //this connection string is not safe. Use a stored procedure
+                SqlCommand cmd = new SqlCommand(spName);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue(spParameter, value + '%');
+                cmd.Connection = this.getConnection();
 
-            // read from db
-            SqlDataReader reader = cmd.ExecuteReader();
-            return reader;
+                // read from db
+                SqlDataReader reader = cmd.ExecuteReader();
+                return reader;
+            }
+            catch(Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("######### DBMASTER CATCH GETSPREADER" + e);
+
+            }
+            return null;
+        }
+        public void updateRecord(string clockOutValue, string dateOutValue, string workLunchBITValue, string employeeIdValue)
+        {
+            int rowsAffected = 0;
+            try
+            {
+              
+                //this connection string is not safe. Use a stored procedure
+                SqlCommand cmd = new SqlCommand("spClockOutRecord");
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@ClockOut", clockOutValue);
+                cmd.Parameters.AddWithValue("@DateOut", dateOutValue);
+                cmd.Parameters.AddWithValue("@WorkLunch", workLunchBITValue);
+                cmd.Parameters.AddWithValue("@EmployeeID", employeeIdValue);
+                cmd.Connection = this.getConnection();
+                rowsAffected = cmd.ExecuteNonQuery();
+                closeConnection();
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("######### DBMASTER CATCH UpdateRecord" + e);
+
+            }
+            System.Diagnostics.Debug.WriteLine("######### DBMASTER SQL Update rowsAffected: " + rowsAffected);
+        }
+        public void insertNewRecord(string workIdValue, string employeeIdValue, string clockInValue, string dateInValue)
+        {
+            int rowsAffected=0;
+            try
+            {
+                // Create a command
+                //this connection string is not safe. Use a stored procedure
+                SqlCommand cmd = new SqlCommand("spInsertRecord");
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@WorkID", workIdValue);
+                cmd.Parameters.AddWithValue("@EmployeeID", employeeIdValue);
+                cmd.Parameters.AddWithValue("@ClockIn", clockInValue);
+                cmd.Parameters.AddWithValue("@DateIn", dateInValue);
+                cmd.Connection = this.getConnection();
+                rowsAffected = cmd.ExecuteNonQuery();
+                closeConnection();
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("######### DBMASTER CATCH InsertNewREcord" + e);
+
+            }
+            System.Diagnostics.Debug.WriteLine("######### DBMASTER SQL INSERT rowsAffected: " + rowsAffected);
+
         }
 
         /// <summary>

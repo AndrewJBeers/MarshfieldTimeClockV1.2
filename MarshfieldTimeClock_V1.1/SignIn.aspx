@@ -19,7 +19,7 @@
                 <br />
                 <br />
                 <br />
-                <img title="School Logo" alt="School Logo" src="Images/bluejay.png" style="text-align: center; height: 150px; width: 150px;">
+                <img title="School Logo" alt="School Logo" src="Images/bluejay.png" style="text-align: center; height: 150px; width: 150px;"/>
                 <br />
                 <br />
         </div>
@@ -50,7 +50,7 @@
         <div id="SignInButton">
             <br />
             <br />
-            <asp:Button ID="btnSignIn" runat="server" PostBackUrl="~/TimeClock.aspx" BackColor="#2D2D2C" Font-Names="monospace" ForeColor="#7391EA" Text="Sign In" Font-Size="20px" Font-Bold="True" Font-Italic="True" Width="150px" OnClick="btnSignIn_Click" />
+            <asp:Button ID="btnSignIn" runat="server" BackColor="#2D2D2C" Font-Names="monospace" ForeColor="#7391EA" Text="Sign In" Font-Size="20px" Font-Bold="True" Font-Italic="True" Width="150px" OnClick="btnSignIn_Click" />
             <br />
             <br />
         </div>  
