@@ -35,8 +35,6 @@
                 <li class="active" id="btn-hours">
                     <asp:Button ID ="btnHoursWorked" runat="server" Text="Hours Worked" Height="52px" OnClick="btnHoursWorked_Click" />
                 </li>
-               <%-- <li class="active" id="btn-time"><a href="TimeClock.aspx">Time Clock</a></li>
-                <li class="active" id="btn-hours"><a href="HoursWorked.aspx">Hours Worked</a></li>--%>
             </ul>
         </div>
     </nav>

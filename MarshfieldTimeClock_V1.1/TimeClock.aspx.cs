@@ -129,7 +129,7 @@ namespace MarshfieldTimeClock_V1._1
             }
         }
 
-        protected void btnChangeRole_Click(object sender, EventArgs e)
+        protected void btnChangeRole_Click(object sender, EventArgs e) /// ############# could cause problem if someone checks meal punch and then changes rolls!!! need to fix!!!
         {
             myEmployee = (Employee)Session["Employee"];
             lblAlert.Text = "";
