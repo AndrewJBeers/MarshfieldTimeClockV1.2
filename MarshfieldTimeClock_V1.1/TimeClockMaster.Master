@@ -28,11 +28,16 @@
         <br />
     </div>
      <%--navigation--%>
+     <form id="form1" runat="server">
     <nav class="navbar navbar-default">
         <div class="container-fluid" id="navigation">
             <ul class="nav navbar-nav">
-                <li class="active" id="btn-time"><a href="TimeClock.aspx">Time Clock</a></li>
-                <li class="active" id="btn-hours"><a href="HoursWorked.aspx">Hours Worked</a></li>
+                <li class="active" id="btn-time">
+                    <asp:Button ID ="btnTimeClock" runat="server" Text="Time Clock" Height="52px" OnClick="btnTimeClock_Click"/>
+                </li>
+                <li class="active" id="btn-hours">
+                    <asp:Button ID ="btnHoursWorked" runat="server" Text="Hours Worked" Height="52px" OnClick="btnHoursWorked_Click" />
+                </li>
             </ul>
         </div>
     </nav>
@@ -44,7 +49,7 @@
         
         </asp:ContentPlaceHolder>
     </main>
-
+           </form>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

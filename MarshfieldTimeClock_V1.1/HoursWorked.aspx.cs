@@ -13,34 +13,50 @@ namespace MarshfieldTimeClock_V1._1
 {
     public partial class HoursWorked : System.Web.UI.Page
     {
+        DBMaster db = new DBMaster();
+        Employee myEmployee = new Employee();
+        
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            populateTable(sender, e);
-            if(is4WeekMonth(sender, e) == true)
+            if (!IsPostBack)
             {
-                set4WeekMonth(sender, e);
-            }
-            else if(is6WeekMonth(sender, e) == true)
-            {
-                // 6 week month no need to set
-            }else
-            {
-                set5WeekMonth(sender, e);
+               myEmployee = (Employee)Session["Employee"];
+                if (myEmployee.DaysWorked.Count == 0 || myEmployee.HoursWorked.Count == 0)
+                {
+                    SqlDataReader reader = db.getSpReader("spGetMonthHours", "@EmployeeID", myEmployee.EmployeeID);
+                    while (reader.Read())
+                    {
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            if (reader.GetName(i) == "DateIn")
+                            {
+                                myEmployee.DaysWorked.Add(Convert.ToDateTime(reader[i].ToString()));
+                            }
+                            else if (reader.GetName(i) == "Total_Time")
+                            {
+                                myEmployee.HoursWorked.Add(Convert.ToDouble(reader[i].ToString()));
+                            }
+                        }
+                    }
+                    db.closeConnection();
+                }
+                populateTable(sender, e);
+
+                if (is4WeekMonth(sender, e) == true)
+                {
+                    set4WeekMonth(sender, e);
+                }
+                else if (is6WeekMonth(sender, e) == true)
+                {
+                    // 6 week month no need to set
+                }
+                else
+                {
+                    set5WeekMonth(sender, e);
+                }
             }
 
-            //Employee employee = new Employee();
-            //DBMaster dbMaster = new DBMaster();
-            //SqlDataReader reader = dbMaster.getReader("Select * From Log_Table");
-            //int i = 0;
-            //while (reader.Read())
-            //{
-            //    employee.RolesDescription.Add(reader.ToString());
-            //}
-            //dbMaster.closeConnection();
-            //foreach (string stuff in employee.RolesDescription)
-            //{
-            //    Console.WriteLine(stuff);
-            //}
 
 
         }
@@ -54,61 +70,188 @@ namespace MarshfieldTimeClock_V1._1
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected void populateTable(object sender, EventArgs e)
+        protected void populateTable( object sender, EventArgs e)
         {
-            Wk1Sun.Text = "0";
-            Wk1Mon.Text = "5";
-            Wk1Tues.Text = "0";
-            Wk1Wed.Text = "8";
-            Wk1Thur.Text = "0";
-            Wk1Fri.Text = "4";
-            Wk1Sat.Text = "0";
-
-            Wk2Sun.Text = "7";
-            Wk2Mon.Text = "0";
-            Wk2Tues.Text = "3";
-            Wk2Wed.Text = "4";
-            Wk2Thur.Text = "0";
-            Wk2Fri.Text = "0";
-            Wk2Sat.Text = "0";
-
-            Wk3Sun.Text = "0";
-            Wk3Mon.Text = "0";
-            Wk3Tues.Text = "0";
-            Wk3Wed.Text = "0";
-            Wk3Thur.Text = "0";
-            Wk3Fri.Text = "0";
-            Wk3Sat.Text = "0";
-
-            Wk4Sun.Text = "0";
-            Wk4Mon.Text = "0";
-            Wk4Tues.Text = "0";
-            Wk4Wed.Text = "0";
-            Wk4Thur.Text = "0";
-            Wk4Fri.Text = "0";
-            Wk4Sat.Text = "0";
-
-            Wk5Sun.Text = "0";
-            Wk5Mon.Text = "0";
-            Wk5Tues.Text = "0";
-            Wk5Wed.Text = "0";
-            Wk5Thur.Text = "0";
-            Wk5Fri.Text = "0";
-            Wk5Sat.Text = "0";
-
-            Wk6Sun.Text = "0";
-            Wk6Mon.Text = "0";
-            Wk6Tues.Text = "0";
-            Wk6Wed.Text = "0";
-            Wk6Thur.Text = "0";
-            Wk6Fri.Text = "0";
-            Wk6Sat.Text = "0";
+            DateTime now = new DateTime();
+            now = DateTime.Now;
+            var firstDayOfMonth = new DateTime(now.Year, now.Month, 1);
+            int daysInMonth = DateTime.DaysInMonth(now.Year, now.Month);
 
 
+            // sets starting day of month
+            int offset = getFirstDayOfMonth(firstDayOfMonth, sender, e);
+
+            for (int i = 0; i < myEmployee.HoursWorked.Count(); i++)
+            {
+                int day = myEmployee.DaysWorked[i].Day;
+                day = day + offset;
+
+                switch (day) {
+                    case 1:
+                         Wk1Sun.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 2:
+                        Wk1Mon.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 3:
+                        Wk1Tues.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 4:
+                        Wk1Wed.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 5:
+                        Wk1Thur.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 6:
+                        Wk1Fri.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 7:
+                        Wk1Sat.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+
+                    case 8:
+                        Wk2Sun.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 9:
+                        Wk2Mon.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 10:
+                        Wk2Tues.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 11:
+                        Wk2Wed.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 12:
+                        Wk2Thur.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 13:
+                        Wk2Fri.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 14:
+                        Wk2Sat.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+
+                    case 15:
+                        Wk3Sun.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 16:
+                        Wk3Mon.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 17:
+                        Wk3Tues.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 18:
+                        Wk3Wed.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 19:
+                        Wk3Thur.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 20:
+                        Wk3Fri.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 21:
+                        Wk3Sat.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+
+                    case 22:
+                        Wk4Sun.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 23:
+                        Wk4Mon.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 24:
+                        Wk4Tues.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 25:
+                        Wk4Wed.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 26:
+                        Wk4Thur.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 27:
+                        Wk4Fri.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 28:
+                        Wk4Sat.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+
+                    case 29:
+                        Wk5Sun.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 30:
+                        Wk5Mon.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 31:
+                        Wk5Tues.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 32:
+                        Wk5Wed.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 33:
+                        Wk5Thur.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 34:
+                        Wk5Fri.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 35:
+                        Wk5Sat.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+
+                    case 36:
+                        Wk6Sun.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 37:
+                        Wk6Mon.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 38:
+                        Wk6Tues.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 39:
+                        Wk6Wed.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 40:
+                        Wk6Thur.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 41:
+                        Wk6Fri.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                    case 42:
+                        Wk6Sat.Text = setDayHours(myEmployee.HoursWorked[i], sender, e);
+                        break;
+                }
+         }
 
             calculateTotals(sender, e);
         }
+        protected string setDayHours(double hours, object sender, EventArgs e)
+        {
 
+
+            return String.Format("{0:0.00}", hours);
+        }
+        protected int getFirstDayOfMonth(DateTime firstDayOfMonth, object sender, EventArgs e)
+        {
+
+            switch (firstDayOfMonth.DayOfWeek)
+            {
+                case DayOfWeek.Sunday:
+                    return 0;
+                case DayOfWeek.Monday:
+                    return 1;
+                case DayOfWeek.Tuesday:
+                    return 2;
+                case DayOfWeek.Wednesday:
+                    return 3;
+                case DayOfWeek.Thursday:
+                    return 4;
+                case DayOfWeek.Friday:
+                    return 5;
+                case DayOfWeek.Saturday:
+                    return 6;
+               
+            }
+            return 0;
+        }
 
         /// <summary>
         /// check if month is feb and if the 1st is on sunday
@@ -148,6 +291,7 @@ namespace MarshfieldTimeClock_V1._1
             }
             return false;
         }
+  
 
         /// <summary>
         /// Sets Visual table to show 4 week month

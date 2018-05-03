@@ -8,34 +8,39 @@ namespace MarshfieldTimeClock_V1._1
     public class Employee
     {
         private string employeeID;
+        private DateTime fogottenClockout;
 
-        private List<string> rolesDescription = new List<string>();
-        private List<string> WorkID = new List<string>();
+        private List<string> roles= new List<string>();
+        private List<string> workID = new List<string>();
 
         private List<DateTime> daysWorked = new List<DateTime>();
         private List<double> hoursWorked = new List<double>();
 
 
-        public Employee(string employeeId)
+        public Employee()
         {
-            employeeID = employeeId;
         }
-
+        public Employee(string empID)
+        {
+            employeeID = empID;
+        }
 
         public string EmployeeID
         {
+            
             get { return employeeID;}
+            set { employeeID = value; }
         }
-        public List<string> RolesDescription
+        public List<string> Roles
         {
-            get{ return rolesDescription; }
-            set { rolesDescription = value;}
+            get{ return roles; }
+            set { roles = value;}
         }
 
-        public List<string> WorkID1
+        public List<string> WorkID
         {
-            get { return WorkID;}
-            set { WorkID = value;}
+            get { return workID;}
+            set { workID = value;}
         }
 
         public List<DateTime> DaysWorked
@@ -50,8 +55,10 @@ namespace MarshfieldTimeClock_V1._1
             set { hoursWorked = value; }
         }
 
-
-
-       
+        public DateTime FogottenClockout
+        {
+            get  {  return fogottenClockout; }
+            set {  fogottenClockout = value; }
+        }
     }
 }

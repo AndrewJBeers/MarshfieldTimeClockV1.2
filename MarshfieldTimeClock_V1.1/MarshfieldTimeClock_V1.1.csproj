@@ -96,6 +96,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Global.asax" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -152,8 +153,11 @@
     <Content Include="scripts\umd\popper.min.js" />
     <Content Include="SignIn.aspx" />
     <Content Include="StyleSheets\StyleSheet.css" />
+    <Content Include="test.aspx" />
     <Content Include="TimeClock.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="scripts\umd\popper.min.js.map" />
     <Content Include="scripts\umd\popper.js.map" />
     <Content Include="scripts\umd\popper-utils.min.js.map" />
@@ -168,6 +172,9 @@
   <ItemGroup>
     <Compile Include="App_Code\DBMaster.cs" />
     <Compile Include="App_Code\Employee.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="HoursWorked.aspx.cs">
       <DependentUpon>HoursWorked.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -182,6 +189,13 @@
     </Compile>
     <Compile Include="SignIn.aspx.designer.cs">
       <DependentUpon>SignIn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="test.aspx.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="test.aspx.designer.cs">
+      <DependentUpon>test.aspx</DependentUpon>
     </Compile>
     <Compile Include="TimeClock.aspx.cs">
       <DependentUpon>TimeClock.aspx</DependentUpon>

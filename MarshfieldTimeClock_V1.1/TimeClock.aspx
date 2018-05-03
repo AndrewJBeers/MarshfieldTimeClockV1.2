@@ -16,7 +16,7 @@
 
 <%--Main--%>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <form id="form1" runat="server">
+    <%--   <form id="form1" runat="server">--%>
 
     <div id="InteractivePage">
        <div id="timeClock">
@@ -33,12 +33,10 @@
         <div id="dropDown">
             <br />
             <br />
-            <asp:DropDownList ID="drpDwnWorkId" runat="server" OnSelectedIndexChanged="drpDwnWorkId_SelectedIndexChanged" OnTextChanged="drpDwnWorkId_SelectedIndexChanged" Height="16px" Width="124px" >
-                <asp:ListItem>Choose Code</asp:ListItem>
-                <asp:ListItem>Bus Driver</asp:ListItem>
-                <asp:ListItem>Janitor</asp:ListItem>
-                <asp:ListItem>Cook</asp:ListItem>
+            <asp:DropDownList ID="drpDwnWorkId" runat="server" OnSelectedIndexChanged="drpDwnWorkId_SelectedIndexChanged" OnTextChanged="drpDwnWorkId_SelectedIndexChanged" Height="24px" Width="124px" >
+                
             </asp:DropDownList>
+            <br />
             <br />
             <asp:CheckBox ID="chkBxLunch" runat="server" Font-Bold="True" Font-Names="monospace" Font-Size="15px" ForeColor="#1F3576" Text=" Worked Through Lunch" />
             <br />
@@ -48,6 +46,7 @@
             <br />
         </div>
         <div id="ClockInOut">
+            <asp:Label ID="lblAlert" runat="server" Text=""></asp:Label>
             <br />
             <br />
             <asp:Button ID="btnClockIn" runat="server" Text="Clock In" OnClick="btnClockIn_Click"  />
@@ -58,7 +57,7 @@
             <asp:Label ID="lblTimeClockStatus" runat="server" Font-Names="Monospace"></asp:Label>
         </div>
     </div>
-  </form>
+ <%-- </form>--%>
 
 
 
