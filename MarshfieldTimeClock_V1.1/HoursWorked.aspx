@@ -32,6 +32,7 @@
            <h2 id="HoursWorkedHeader"> Hours Worked </h2>
            <br />
             <div id="Worked">
+                <asp:Label ID="lblAlert" runat="server" Text=""></asp:Label>
                <br />
                 <asp:Table ID="HoursWorkedTable" runat="server" Height="96px" Width="218px" >
                      <asp:TableHeaderRow runat="server">

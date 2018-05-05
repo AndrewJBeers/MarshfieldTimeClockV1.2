@@ -29,7 +29,8 @@ namespace MarshfieldTimeClock_V1._1
             }
             catch(Exception exc)
             {
-                System.Diagnostics.Debug.WriteLine("######### DBMASTER getConnection():  " + exc);
+                System.Diagnostics.Debug.WriteLine("######### DBMASTER getConnection():  " + exc.Message);
+                throw;
             }
         }
 
@@ -43,55 +44,46 @@ namespace MarshfieldTimeClock_V1._1
         {
             try
             {
-                // Create a command
-                //this connection string is not safe. Use a stored procedure
                 SqlCommand cmd = new SqlCommand(spName);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue(spParameter, value + '%');
-                cmd.Connection = this.getConnection();
-
-                // read from db
+                cmd.Connection = getConnection();
                 SqlDataReader reader = cmd.ExecuteReader();
                 return reader;
             }
             catch(Exception exc)
             {
-                System.Diagnostics.Debug.WriteLine("######### DBMASTER getSpReader():  " + exc);
-
+                System.Diagnostics.Debug.WriteLine("######### DBMASTER getSpReader():  " + exc.Message);
+                throw;
             }
-            return null;
         }
         public void updateRecord(string clockOutValue, string dateOutValue, string workLunchBITValue, string employeeIdValue)
         {
             int rowsAffected = 0;
             try
             {
-              
-                //this connection string is not safe. Use a stored procedure
                 SqlCommand cmd = new SqlCommand("spClockOutRecord");
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@ClockOut", clockOutValue);
                 cmd.Parameters.AddWithValue("@DateOut", dateOutValue);
                 cmd.Parameters.AddWithValue("@WorkLunch", workLunchBITValue);
                 cmd.Parameters.AddWithValue("@EmployeeID", employeeIdValue);
-                cmd.Connection = this.getConnection();
+                cmd.Connection = getConnection();
                 rowsAffected = cmd.ExecuteNonQuery();
+                System.Diagnostics.Debug.WriteLine("######### DBMASTER SQL Update rowsAffected: " + rowsAffected);
                 closeConnection();
             }
             catch (Exception exc)
             {
-                System.Diagnostics.Debug.WriteLine("######### DBMASTER updateRecord():  " + exc);
-
+                System.Diagnostics.Debug.WriteLine("######### DBMASTER updateRecord():  " + exc.Message);
+                throw;
             }
-            System.Diagnostics.Debug.WriteLine("######### DBMASTER SQL Update rowsAffected: " + rowsAffected);
         }
         public void insertNewRecord(string workIdValue, string employeeIdValue,string roleValue, string clockInValue, string dateInValue)
         {
             int rowsAffected=0;
             try
             {
-                // Create a command
-                //this connection string is not safe. Use a stored procedure
                 SqlCommand cmd = new SqlCommand("spInsertRecord");
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@WorkID", workIdValue);
@@ -99,17 +91,16 @@ namespace MarshfieldTimeClock_V1._1
                 cmd.Parameters.AddWithValue("@Role", roleValue);
                 cmd.Parameters.AddWithValue("@ClockIn", clockInValue);
                 cmd.Parameters.AddWithValue("@DateIn", dateInValue);
-                cmd.Connection = this.getConnection();
+                cmd.Connection = getConnection();
                 rowsAffected = cmd.ExecuteNonQuery();
+                System.Diagnostics.Debug.WriteLine("######### DBMASTER SQL INSERT rowsAffected: " + rowsAffected);
                 closeConnection();
             }
             catch (Exception exc)
             {
-                System.Diagnostics.Debug.WriteLine("######### DBMASTER insertNewRecord():  " + exc);
-
+                System.Diagnostics.Debug.WriteLine("######### DBMASTER insertNewRecord():  " + exc.Message);
+                throw;
             }
-            System.Diagnostics.Debug.WriteLine("######### DBMASTER SQL INSERT rowsAffected: " + rowsAffected);
-
         }
 
         /// <summary>
@@ -126,7 +117,8 @@ namespace MarshfieldTimeClock_V1._1
             }
             catch(Exception exc)
             {
-                System.Diagnostics.Debug.WriteLine("######### DBMASTE closeConnection():  " + exc);
+                System.Diagnostics.Debug.WriteLine("######### DBMASTE closeConnection():  " + exc.Message);
+                throw;
             }
 
         }

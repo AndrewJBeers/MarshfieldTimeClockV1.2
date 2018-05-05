@@ -19,54 +19,64 @@ namespace MarshfieldTimeClock_V1._1
             /// populate users roles
              if (!IsPostBack)
             {
-                chkBxLunch.Visible = false;
-                myEmployee = (Employee)Session["Employee"];
-                if (myEmployee.Roles.Count == 0 || myEmployee.WorkID.Count == 0)
+                try
                 {
-                    SqlDataReader reader = db.getSpReader("spGetEmployeeRolls", "@EmployeeID", myEmployee.EmployeeID);
-                    while (reader.Read())
+                    chkBxLunch.Visible = false;
+                    myEmployee = (Employee)Session["Employee"];
+                    if (myEmployee.Roles.Count == 0 || myEmployee.WorkID.Count == 0)
                     {
-                        for (int i = 0; i < reader.FieldCount; i++)
+                        SqlDataReader reader = db.getSpReader("spGetEmployeeRolls", "@EmployeeID", myEmployee.EmployeeID);
+                        while (reader.Read())
                         {
-                            if (reader.GetName(i) == "Role")
+                            for (int i = 0; i < reader.FieldCount; i++)
                             {
-                                myEmployee.Roles.Add(reader[i].ToString());
-                            }
-                            else if (reader.GetName(i) == "WorkID")
-                            {
-                                myEmployee.WorkID.Add(reader[i].ToString());
+                                if (reader.GetName(i) == "Role")
+                                {
+                                    myEmployee.Roles.Add(reader[i].ToString());
+                                }
+                                else if (reader.GetName(i) == "WorkID")
+                                {
+                                    myEmployee.WorkID.Add(reader[i].ToString());
+                                }
                             }
                         }
+                        db.closeConnection();
                     }
-                    db.closeConnection();
-                }
-                foreach(string role in myEmployee.Roles)
-                {
-                    drpDwnWorkId.Items.Add(role);
-                    if (role == "Paraprofessional")
+                    foreach(string role in myEmployee.Roles)
                     {
-                        chkBxLunch.Visible = true;
+                        drpDwnWorkId.Items.Add(role);
+                        if (role == "Paraprofessional")
+                        {
+                            chkBxLunch.Visible = true;
+                        }
                     }
-                }
-                if (drpDwnWorkId.Items.Count < 2)
-                {
-                    btnChangeRole.Visible = false;
-                }
+                    if (drpDwnWorkId.Items.Count < 2)
+                    {
+                        btnChangeRole.Visible = false;
+                    }
 
-                txtBxDisplayTime.Text = DateTime.Now.ToString("t");
-                txtBxDisplayDay.Text = DateTime.Now.ToString("D");
+                    txtBxDisplayTime.Text = DateTime.Now.ToString("t");
+                    txtBxDisplayDay.Text = DateTime.Now.ToString("D");
 
-                if (buttonsEnabled)
-                {
-                    btnClockIn.Enabled = true;
-                    btnClockOut.Enabled = true;
-                }
-                else
-                {
-                    btnClockIn.Enabled = false;
-                    btnClockOut.Enabled = false;
-                }
+                    if (buttonsEnabled)
+                    {
+                        btnClockIn.Enabled = true;
+                        btnClockOut.Enabled = true;
+                    }
+                    else
+                    {
+                        btnClockIn.Enabled = false;
+                        btnClockOut.Enabled = false;
+                    }
                 
+                }
+                catch(Exception exc)
+                {
+                    System.Diagnostics.Debug.WriteLine("######### TIMECLOCK Page_Load():  " + exc.Message);
+                    lblAlert.Text = "Error could not complete Page_Load. Please inform system administrator. ";
+                    lblTimeClockStatus.Text = "Error Message: " + exc.Message;
+                }
+               
             }
         }
 
@@ -108,7 +118,9 @@ namespace MarshfieldTimeClock_V1._1
             }
             catch (Exception exc)
             {
-                System.Diagnostics.Debug.WriteLine("######### TIMECLOCK btnClockIn_Click():  " + exc);
+                System.Diagnostics.Debug.WriteLine("######### TIMECLOCK btnClockIn_Click():  " + exc.Message);
+                lblAlert.Text = "Error could not complete clock in. Please inform system administrator. ";
+                lblTimeClockStatus.Text = "Error Message: " + exc.Message;
             }
 
         }
@@ -140,7 +152,9 @@ namespace MarshfieldTimeClock_V1._1
             }
             catch (Exception exc)
             {
-                System.Diagnostics.Debug.WriteLine("######### TIMECLOCK btnClockOut_Click():  " + exc);
+                System.Diagnostics.Debug.WriteLine("######### TIMECLOCK btnClockOut_Click():  " + exc.Message);
+                lblAlert.Text = "Error could not complete clock out. Please inform system administrator. ";
+                lblTimeClockStatus.Text = "Error Message: " + exc.Message;
             }
 
         }
@@ -174,7 +188,10 @@ namespace MarshfieldTimeClock_V1._1
             }
             catch (Exception exc)
             {
-                System.Diagnostics.Debug.WriteLine("######### TIMECLOCK btnChangeRole_Click():  " + exc);
+                System.Diagnostics.Debug.WriteLine("######### TIMECLOCK btnChangeRole_Click():  " + exc.Message);
+                lblAlert.Text = "Error could not complete role change. Please inform system administrator. ";
+                lblTimeClockStatus.Text ="Error Message: " + exc.Message;
+                //throw;
             }
 
         }
@@ -197,7 +214,8 @@ namespace MarshfieldTimeClock_V1._1
             }
             catch(Exception exc)
             {
-                System.Diagnostics.Debug.WriteLine("######### TIMECLOCK RecordClockoutUpdate():  " + exc);
+                System.Diagnostics.Debug.WriteLine("######### TIMECLOCK RecordClockoutUpdate():  " + exc.Message);
+                throw;
             }
 
         }
@@ -215,8 +233,8 @@ namespace MarshfieldTimeClock_V1._1
             }
             catch (Exception exc)
             {
-                System.Diagnostics.Debug.WriteLine("######### TIMECLOCK NewRecordInsert():  " + exc);
-
+                System.Diagnostics.Debug.WriteLine("######### TIMECLOCK NewRecordInsert():  " + exc.Message);
+                throw;
             }
 
         }
@@ -249,7 +267,8 @@ namespace MarshfieldTimeClock_V1._1
             }
             catch(Exception exc)
             {
-                System.Diagnostics.Debug.WriteLine("######### TIMECLOCK isNewRole():  " + exc);
+                System.Diagnostics.Debug.WriteLine("######### TIMECLOCK isNewRole():  " + exc.Message);
+                throw;
             }
 
         }
@@ -266,6 +285,7 @@ namespace MarshfieldTimeClock_V1._1
                 myEmployee = (Employee)Session["Employee"];
                 myEmployee.FogottenClockout = DateTime.MinValue;
                 SqlDataReader reader = db.getSpReader("spCheckClockedIN", "@EmployeeID", myEmployee.EmployeeID);
+
                 while (reader.Read())
                 {
 
@@ -291,12 +311,14 @@ namespace MarshfieldTimeClock_V1._1
                         }
                     }
                 }
+                throw new Exception("TimeClock, isClockedIn(), Line: 272. reader returned no data from database.");
+
             }
             catch (Exception exc)
             {
-                System.Diagnostics.Debug.WriteLine("######### TIMECLOCK isClockedIn():  " + exc);
+                System.Diagnostics.Debug.WriteLine("######### TIMECLOCK isClockedIn():  " + exc.Message);
+                throw;
             }
-            //return false;
         }
 
 

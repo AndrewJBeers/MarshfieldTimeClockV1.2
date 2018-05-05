@@ -16,12 +16,12 @@ namespace MarshfieldTimeClock_V1._1
 
         protected void btnTimeClock_Click(object sender, EventArgs e)
         {
-            Response.Redirect("TimeClock.aspx");
+            Response.Redirect("TimeClock.aspx",false);
         }
 
         protected void btnHoursWorked_Click(object sender, EventArgs e)
         {
-            Response.Redirect("HoursWorked.aspx");
+            Response.Redirect("HoursWorked.aspx",false);
         }
     }
 }

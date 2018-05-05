@@ -13,6 +13,15 @@ namespace MarshfieldTimeClock_V1._1 {
     public partial class HoursWorked {
         
         /// <summary>
+        /// lblAlert control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAlert;
+        
+        /// <summary>
         /// HoursWorkedTable control.
         /// </summary>
         /// <remarks>

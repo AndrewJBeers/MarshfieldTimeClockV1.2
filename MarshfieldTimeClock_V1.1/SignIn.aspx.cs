@@ -11,47 +11,40 @@ namespace MarshfieldTimeClock_V1._1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("###############PageLoad");
             if (!IsPostBack)
             {
-                System.Diagnostics.Debug.WriteLine("###############!IPostBack");
-                if (txtBxUserName.Text == "")
+                try
                 {
-                    txtBxUserName.Text = "paul.rottmund";
-                    //rogina.totten
+                    if (txtBxUserName.Text == "")
+                    {
+                        txtBxUserName.Text = "paul.rottmund";
+                        //rogina.totten
+                    }
+                }
+                catch(Exception exc)
+                {
+                    System.Diagnostics.Debug.WriteLine("######### SIGNIN Page_Load():  " + exc.Message);
                 }
             }
         }
 
         protected void btnSignIn_Click(object sender, EventArgs e)
         {
-
-            if (txtBxUserName.Text != "")
-            {
-                System.Diagnostics.Debug.WriteLine("###############BtnSignIn");
-                Employee myEmployee = new Employee(txtBxUserName.Text);
-
-                Session["Employee"] = myEmployee;
-                System.Diagnostics.Debug.WriteLine("############SignIn" + Session["Employee"]);
-                Response.Redirect("TimeClock.aspx");
-            }
-
-
-            /// if username and password are not empty
             try
             {
-                /// LADP authentication
-                /// ~~ if authorized 
-                ///     log in and go to time clock page
-                /// ~~ else (not authorized)
-                ///     error msg wrong username or password
-
-
+                if (txtBxUserName.Text != "")
+                {
+                    Employee myEmployee = new Employee(txtBxUserName.Text);
+                    Session["Employee"] = myEmployee;
+                    Response.Redirect("TimeClock.aspx",false);
+                }
             }
-            catch
+            catch(Exception exc)
             {
+                System.Diagnostics.Debug.WriteLine("######### SIGNIN btnSignIn_Click():  " + exc.Message);
 
             }
+
         }
     }
 }
