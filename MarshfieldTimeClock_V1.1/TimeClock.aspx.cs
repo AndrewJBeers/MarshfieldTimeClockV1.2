@@ -311,7 +311,8 @@ namespace MarshfieldTimeClock_V1._1
                         }
                     }
                 }
-                throw new Exception("TimeClock, isClockedIn(), Line: 272. reader returned no data from database.");
+                return false;
+                //throw new Exception("TimeClock, isClockedIn(), Line: 272. reader returned no data from database.");
 
             }
             catch (Exception exc)
