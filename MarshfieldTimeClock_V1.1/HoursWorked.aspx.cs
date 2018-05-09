@@ -231,7 +231,7 @@ namespace MarshfieldTimeClock_V1._1
             catch(Exception exc)
             {
                 System.Diagnostics.Debug.WriteLine("######### HOURSWORKED populateTable():  " + exc.Message);
-                throw
+                throw;
             }
 
 
