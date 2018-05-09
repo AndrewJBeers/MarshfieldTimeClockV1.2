@@ -33,7 +33,7 @@
         <div id="dropDown">
             <br />
             <br />
-            <asp:DropDownList ID="drpDwnWorkId" runat="server" OnSelectedIndexChanged="drpDwnWorkId_SelectedIndexChanged" OnTextChanged="drpDwnWorkId_SelectedIndexChanged" Height="24px" Width="124px" >
+            <asp:DropDownList ID="drpDwnWorkId" runat="server" AutoPostBack="True" OnSelectedIndexChanged="drpDwnWorkId_SelectedIndexChanged" OnTextChanged="drpDwnWorkId_SelectedIndexChanged" Height="24px" >
                 
             </asp:DropDownList>
             <br />

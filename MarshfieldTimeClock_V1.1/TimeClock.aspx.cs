@@ -42,19 +42,23 @@ namespace MarshfieldTimeClock_V1._1
                         }
                         db.closeConnection();
                     }
-                    foreach(string role in myEmployee.Roles)
+                    foreach (string role in myEmployee.Roles)
                     {
                         drpDwnWorkId.Items.Add(role);
-                        if (role == "Paraprofessional")
-                        {
-                            chkBxLunch.Visible = true;
-                        }
                     }
+
                     if (drpDwnWorkId.Items.Count < 2)
                     {
                         btnChangeRole.Visible = false;
                     }
-
+                    if (drpDwnWorkId.Items[0].Text != "Paraprofessional")
+                    {
+                        chkBxLunch.Visible = false;
+                    }
+                    else
+                    {
+                        chkBxLunch.Visible = true;
+                    }
                     txtBxDisplayTime.Text = DateTime.Now.ToString("t");
                     txtBxDisplayDay.Text = DateTime.Now.ToString("D");
 
@@ -68,7 +72,7 @@ namespace MarshfieldTimeClock_V1._1
                         btnClockIn.Enabled = false;
                         btnClockOut.Enabled = false;
                     }
-                
+
                 }
                 catch(Exception exc)
                 {
@@ -84,6 +88,18 @@ namespace MarshfieldTimeClock_V1._1
         {
             
             buttonsEnabled = true;
+            if(drpDwnWorkId.SelectedItem.Text != "Paraprofessional")
+            {
+                chkBxLunch.Visible = false;
+            }
+            else
+            {
+                chkBxLunch.Visible = true;
+            }
+
+
+
+
         }
 
         /// <summary>
